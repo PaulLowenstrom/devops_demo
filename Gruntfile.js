@@ -6,7 +6,7 @@ module.exports = function (grunt) {
  }
  });
 // Load plugin
- grunt.loadNpmTasks(“grunt-contrib-qunit”);
+ grunt.loadNpmTasks("grunt-contrib-qunit");
 // Task to run tests
- grunt.registerTask(“test”, “qunit”);
+ grunt.registerTask("test", "qunit");
 };
