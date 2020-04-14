@@ -1,3 +1,4 @@
+/*
 function div_math() {
     let a = document.getElementById("math_input_a").value;
     let b = document.getElementById("math_input_b").value;
@@ -10,4 +11,14 @@ export function num(a) {
         return true;
     else
         return false;
+}
+*/
+
+module.exports = {
+    num: function(a) {
+        if(a == 2)
+            return true;
+        else
+            return false;
+    }
 }
