@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "sh ./tes.sh"
+    "test": "qunit"
   },
   "repository": {
     "type": "git",
