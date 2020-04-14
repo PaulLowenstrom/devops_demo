@@ -5,7 +5,7 @@ function div_math() {
     document.getElementById("math_ans").innerHTML = "Answer: " + div;
 }
 
-function num(a) {
+export function num(a) {
     if(a == 2)
         return true;
     else
