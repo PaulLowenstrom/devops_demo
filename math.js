@@ -4,3 +4,10 @@ function div_math() {
     let div = a / b;
     document.getElementById("math_ans").innerHTML = "Answer: " + div;
 }
+
+function num(a) {
+    if(a == 2)
+        return true;
+    else
+        return false;
+}
