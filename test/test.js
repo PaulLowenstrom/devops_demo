@@ -8,5 +8,5 @@ function num(a) {
 }
 
 QUnit.test( "hello test", function( assert ) {
-    assert.ok( num(2), "Passed!" );
+    assert.ok( num(1), "Passed!" );
   });
