@@ -1,14 +1,12 @@
-
-function div_math() {
-    let a = document.getElementById("math_input_a").value;
-    let b = document.getElementById("math_input_b").value;
+function div_math(a = document.getElementById("math_input_a").value, b = document.getElementById("math_input_b").value) {
     let div = a / b;
     document.getElementById("math_ans").innerHTML = "Answer: " + div;
 }
 
-function num(a) {
-    if(a == 2)
-        return true;
-    else
-        return false;
+// for testing
+module.exports = {
+    div: function div_math(a = document.getElementById("math_input_a").value, b = document.getElementById("math_input_b").value) {
+        let div = a / b;
+        document.getElementById("math_ans").innerHTML = "Answer: " + div;
+    }
 }

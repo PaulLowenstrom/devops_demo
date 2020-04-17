@@ -1,10 +1,5 @@
-function num(a) {
-    if(a == 2)
-        return true;
-    else
-        return false;
-}
+const math = require('./math');
 
 QUnit.test( "hello test", function( assert ) {
-    assert.ok( num(2), "Passed!" );
+    assert.ok( 1, math.div(2, 2), "Passed!" );
 });
