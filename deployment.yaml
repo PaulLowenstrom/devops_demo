@@ -4,6 +4,11 @@ metadata:
   name: demo
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: nodejs
@@ -14,6 +19,14 @@ spec:
     spec:
       containers:
       - image: dieflo4711/devops_demo:latest
+        imagePullPolicy: Always
         name: nodejs
         ports:
-        - containerPort: 4711  
+        - containerPort: 4711
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 4711
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1  
