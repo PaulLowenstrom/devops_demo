@@ -7,7 +7,4 @@ sudo: required
 services:
  - docker
 after_success:
- - pwd
- - docker build -t / .
- - docker tag Dockerfile:latest Dockerfile:1.2
- - docker push dieflo4711/devops_demo:1.2
+ - scripts/docker.sh
