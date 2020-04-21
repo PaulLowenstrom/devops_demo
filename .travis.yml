@@ -7,8 +7,6 @@ sudo: required
 services:
  - docker
 after_success:
- - if[ "$TRAVIS_BRANCH" == "master" ]; then 
-    docker build -t dieflo4711/devops_demo .
-    docker tag dieflo4711/devops_demo dieflo4711/devops_demo:1.2
-    docker push dieflo4711/devops_demo
-   fi
+ - docker build -t dieflo4711/devops_demo .
+ - docker tag dieflo4711/devops_demo dieflo4711/devops_demo:1.2
+ - docker push dieflo4711/devops_demo
