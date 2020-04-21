@@ -6,7 +6,7 @@ sudo: required
 services:
 - docker
 after_success:
-- "$docker_pass" | docker login -u="$docker_user" --password-stdin
+- docker login -u="$docker_user" --password-stdin < "$docker_pass"
 - docker build -t dieflo4711/devops_demo .
 - docker tag dieflo4711/devops_demo dieflo4711/devops_demo:$TRAVIS_COMMIT
 - docker push dieflo4711/devops_demo:$TRAVIS_COMMIT
