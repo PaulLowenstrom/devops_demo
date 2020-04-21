@@ -1,0 +1,1 @@
+echo "Pushing docker image"
