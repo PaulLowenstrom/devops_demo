@@ -7,4 +7,6 @@ sudo: required
 services:
  - docker
 after_success:
- - scripts/docker.sh
+ - docker build -t "dieflo4711/devops_demo" .
+ - docker tag "dieflo4711/devops_demo":latest "dieflo4711/devops_demo":1.2
+ - docker push "dieflo4711/devops_demo":1.2
