@@ -6,10 +6,10 @@ sudo: required
 services:
 - docker
 after_success:
-- docker login -u="$docker_user" -p="$docker_pass"
+- "$docker_pass" | docker login -u="$docker_user" --password-stdin
 - docker build -t dieflo4711/devops_demo .
-- docker tag dieflo4711/devops_demo dieflo4711/devops_demo:1.2
-- docker push dieflo4711/devops_demo:1.2
+- docker tag dieflo4711/devops_demo dieflo4711/devops_demo:$TRAVIS_COMMIT
+- docker push dieflo4711/devops_demo:$TRAVIS_COMMIT
 env:
   global:
   - secure: o4wi6aNeKMib2OClgdZZHpUinljeRSGuLRooH4jnDVNXjZlkqIeh5nL5p3RZ8Z8kIPoztdUAd/27LIXL+dETJW4/Rp7mYStMvaVc3Duy0Q8qpbishEFQuBsIZ6avGvh/kGPd/CE+fMGyOKvR2UN7gyFfVWTdTB/ZVU9vGGWG79HKE25UyxPMP3pR0iH3OA8dmK/uleSLRVJSM5YPTgj+QuN0C6/XkAX6FiNzd8U4M5vKdDLSuXrrABglfxHDmE6GRJSg7Ed5cP6dTtHC6Rlbue9IKwwR4+lZm681qpzAcWOPbIIRhXnDHMy0TcmeHp1dGZsSxr8VD2iuwxDe4zm38vDyj4/QUZQlOYhQVPYOECh5rlOQmJ+PlwLRaeX157j8sQVCISya7xme2Xes/N4U0d+DkItbjXhGo+rUctP2+QjTMZTBMPrlcbiEZcHVsQIALMddUXU5WxNgOvkmOYUqVjG5o0K//GkPWAszFrZVr5lZoNPvNplYNPyh63q9RCmzyu/JWQZF3e2N7stOaC/ZJCXnOsjvF84w7on70Ta2JDsJ0Xs2+xPep9qUtQvG2Z+TGMDmqZvLD/na6PDK/E9j6wgPXvJhLSzs3V7Ghd7NhKRINnr/Vm0y6JSXLZ4MuuSu7qZTFsjf+6I7s2oFthLE/n8bB73oSG9csz3hQ3AXSkU=
