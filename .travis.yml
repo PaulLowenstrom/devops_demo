@@ -4,4 +4,4 @@ node_js:
 install: 
  - npm install
 script:
- - Makefile test
+ - make test
