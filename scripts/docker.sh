@@ -1,1 +1,1 @@
-echo "Pushing docker image"
+echo "Pushing docker imagee"
