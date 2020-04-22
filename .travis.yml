@@ -7,18 +7,18 @@ services:
 - docker
 after_success:
 - echo "$docker_pass" | docker login -u="$docker_user" --password-stdin
-- docker build -t dieflo4711/devops_demo .
-- docker tag dieflo4711/devops_demo dieflo4711/devops_demo:$TRAVIS_COMMIT
-- docker push dieflo4711/devops_demo:$TRAVIS_COMMIT
+- docker build -t $image .
+- docker tag $image $image:$TRAVIS_COMMIT
+- docker push $image:$TRAVIS_COMMIT
 - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export
   CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
 - source /home/travis/google-cloud-sdk/path.bash.inc
 - gcloud components install kubectl
-- gcloud auth activate-service-account $gcloud_service_Acc --key-file ninth-victor-274922-332047e1472e.json
-  --project $gcloud_project
+- gcloud auth activate-service-account $gcloud_service_Acc --key-file key.json --project
+  $gcloud_project
 - gcloud container clusters get-credentials $gcloud_cluster --zone $gcloud_zone --project
   $gcloud_project
-- kubectl set image deployment/demo nodejs=dieflo4711/devops_demo:$TRAVIS_COMMIT --record=true
+- kubectl set image deployment/demo nodejs=$image:$TRAVIS_COMMIT --record=true
 cache:
   directories:
   - "$HOME/google-cloud-sdk/"
@@ -32,7 +32,7 @@ env:
   - secure: HIViXJQkigI5N+F4FIG8aLZLipp8FeKwMT4y1CEaeDzAcYYlriryLIRiCiU/t350OaWH/JZ9IeEaY/doGsk4UoCpaZvCI8U60KU/BkAPVKeyKmiFluEp20c+f1AE4IwWKXapy+T8Oz5VoVw377IkTWOw2v0kyaeeij3urr2PM2sjiKSVBKO+eOThfqIBYJAf4NnqNbTCa4pFoaNlNIM9mTGqwn6oNrQqmrwDFh0mJxO4qCCscHGDj/R3K8jRlUCtjOWirubZLfAq6UCHQcF5zfZ2eA5SfuhJ5KLi2DFV0EzfO4UzcK4cU3iBhDH/uqYAjshyem+jE45JMISdUlK5nrCG5/muSZL6HoMiPeWKtZvVxKGLin0q341I9n3l4rhj0qfV1JAoLZHb4HslPnjBUeqRVahpyccHP/ubSfkpIIfvfxfYFzDB6zjGRsvE+W93bTxxmnaMzWyh7mU/RgTuFeMw2gjfG2aJwBrNe76SmVYmJ8QO+YY0jjWrNIgAOJZk6qfBJ7IvdlkjBEKJrSHzAKKdtwP/Dj50NowrRTXtJmB6wyqYAinw+8OqgHptMOBRdEVbnt+NFeopPCSd0kzMVOgAf5RJwfo/aUo0rqyMajFYEgXb+e6a0rJNVNSJrsG/lMMQkwKhABdOizO8SR2ckbq7PL7vo76adGm9es7uNuE=
   - secure: NDO5ydZ616RKsIx1viUM5R9YQLfGYkajcD+3gpa1q9f3lFnlVrhWoJ+RmgGYd1GMteyBJ74maFGenkartwKcHhwKhx8kXYyQRoZFds1Zr9pMtI1qw96gpJNItzXxFt/hVNEwPhPkO/qiskLuVXLgXuGwffXL07fPc+DbZ0stzOdz510THbzgOv97WLzNQx++RJma4PdcLBo0RClbfxW/3BuZwmY4yd48wNKx4HEqyWw/2P90XCYDTkacsfl72uyF7ryJ5hajwPGTMb2HUstv6F6R97xcwwlngEg97X/nF34tCivM00nVmYEwV2cmNnfynjIO2IuG76PclxkRiepJhJq6+spu0yYp2FbUhY8b20nS3B4l5fDqA5w/Rnv+WH+7Sx/LvMeUL1SHqBh81UDNk2lB9O9JbBpruiulnOr4myn2yww4ND8e3jkuFgtWvWUFcHrk/cnpy74iVcv9LfnmK/1MDMTaixwu4ZSQAJUJyJ4n8tUAr+MXQsve3/FDjDE+ZWHc6vJ6JqEYqrkoi7EP8j+yKxUCg0uCWGz0MIsdTIQ+W6H53CES47f3+QEteOqY0DZQWceJ0Man+suJCHTYTlIpe8Kh7QhufvDWSHSIzculhVEDr5nFsH9zdmW2i2faT3NOA8loIphRl0CbH0hj398E8xrLDW115BE9yDoPRcU=
   - secure: EEaSK+awClcd/hY17gi3EH8xZ8liB1pZoPOuSKSs04AGZw9X9uYk0GCdAY28yL4AYaSByG4kEPS7e8NzHIdi/eibgzBK3fsp9UNh0eBFYjTbNdaUIkZ+75Eagk+Bu3Sx2CYuoXdjxadgYgNdHhk4m+77zyqEzhzKi7X6ftFywaMu6Fg70AvqFWp96BpVH/vNHQEhZxbsNmZxNvIthmnMk+w6m25iLrl0MGsaKcJ6yzsnFRxvUA4JEgsAgvvgjfRJTg3c5WxTkSs/pSQ5JweBfpPHylMRxusDhxT12wo3ol+KREyWZ4OQVoQBlRuubAD3C7rL2aQAfBSrcBIAYstAcstB9bTx6zk4vTsab3AqMePfwKbcuVQMgQz/rwddffl/4eGS/zVRwih64x98y3g3acCC5EfsD23gsy7uMlGssVIAC6ic/SgXnXBvanAGM/GgWgKtDXw7PWGug4wVNNSaOFoE7AN/mBIKYULeZ5y1XllXjrwyki3XI+Ucd5H7REU0ehF61if0F2pIofw5Ih9yb5rtXzdHfYh3fzd1P6jrfCk62WD+CpJq7lCMI+senDomd9Fsiojvrh218cFPy6/i0vrB8KED6ggA2imtHPjilxY/Vrvfzvy6uHRBpe+0kX4RjK0txEDugXEPFcYWDwp3Q5wIRdyoHei6yzHIs0wrtdU=
+  - secure: N+fCy0yRpN+MmEpO42bXcFR5TvLlykYsuF5aenM4UBNTBo/QUHw77pQ1HZcpiQIQbMlBEsCiBErjeo2mhi8rglDIb1Gmwdbd5KHkz4ZzkVqwTp/yxD8Hv4psuYJ3Cgg1Df2EBT5k3iSH2uKOL3zBws/uIK0JYZDGhkIkZKJ8y2PrNkVVdGbzo9av9Cqob35mEsau24BgdDGno/NIgAG8YCM3Caf5T7Oq0xJBW6EApleUMFhWqOAU3DBqTN3Pll8bHkYWRDViGzkIvmr0hVPQLVL322iurP2zlsF6xhXYddjjQJJ7FypYudyKaSlo4/MqZCeUcCsv9Jgg2wvbiDtls/vu12UILQFyfqjT1eDvFq1uJU26rHoOjqoxHsyufH7hrM/bYUkNfQIY+o4BniYOPmmHENF4e2p4Ycsd6riPS68H2Et2PW+nB9J9wGjhPJUAgZJKEanTJ8uANSx0v+C8mGYFvH6aq6EGf3Jz9pMcuTgCdG+gWXkK9uubjchwcMjpd67KOfI13agTRnKrRn811BKntgS/Xbpd70TBzziwbu2gYQ72+b0vC/935/35oqG7PiBwIhJbScbjAfuJ7pRZWOTSz1yzP3KfuCK5PB8WHEiGRWFakeawLbWBcqdDOyXJMzI/aw3pmsm4Q58mdWF/SkjMqlBo+YDM3knykD+Yv7U=
 before_install:
-- openssl aes-256-cbc -K $encrypted_9f8d0de98a22_key -iv $encrypted_9f8d0de98a22_iv
-  -in ninth-victor-274922-332047e1472e.json.enc -out ninth-victor-274922-332047e1472e.json
-  -d
+- openssl aes-256-cbc -K $encrypted_4409d9b2903a_key -iv $encrypted_4409d9b2903a_iv
+  -in key.json.enc -out key.json -d
