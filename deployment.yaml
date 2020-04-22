@@ -18,7 +18,7 @@ spec:
         app: nodejs
     spec:
       containers:
-      - image: dieflo4711/devops_demo@sha256:972723396bd94dbc97292924c81b72c32d96b51236d076c74b68e53580553065
+      - image: dieflo4711/devops_demo:8134c1ac14998e803b5c07fbb401fa43318f3409
         imagePullPolicy: Always
         name: nodejs
         ports:

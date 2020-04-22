@@ -18,7 +18,6 @@ after_success:
   --project $gcloud_project
 - gcloud container clusters get-credentials $gcloud_cluster --zone $gcloud_zone --project
   $gcloud_project
-- config current-context
 - kubectl set image deployment/demo nodejs=dieflo4711/devops_demo:$TRAVIS_COMMIT --record=true
 cache:
   directories:

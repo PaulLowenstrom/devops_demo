@@ -9,5 +9,4 @@ spec:
     - protocol: TCP
       port: 4711
       targetPort: 4711
-      nodePort: 31000
-  type: NodePort
+  type: LoadBalancer
