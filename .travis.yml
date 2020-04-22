@@ -6,8 +6,10 @@ sudo: required
 services:
 - docker
 after_success:
-- "./scripts/docker.sh"
-- "./scripts/gcloud.sh"
+- chmod +x .scripts/docker.sh
+- chmod +x .scripts/gcloud.sh
+- .scripts/docker.sh
+- .scripts/gcloud.sh
 cache:
   directories:
   - "$HOME/google-cloud-sdk/"
